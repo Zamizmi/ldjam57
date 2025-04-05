@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Level2
+  m_Name: Level2.1
   m_Shader: {fileID: -6465566751694194690, guid: 5f2a3e409e7e7455baba59308642963d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -60,7 +60,7 @@ Material:
     - _Shades: 1
     - _shades: 0.33
     m_Colors:
-    - _Color: {r: 0.3772695, g: 0.509434, b: 0.40426102, a: 1}
+    - _Color: {r: 0.26272696, g: 0.4528302, b: 0.38692394, a: 1}
     - _shadeSizes: {r: 0.3, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

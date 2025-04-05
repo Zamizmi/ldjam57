@@ -7,9 +7,6 @@ public class GameInput : MonoBehaviour
 
     public Action OnInteractHandler;
     public Action OnJumpHandler;
-    public Action OnInteractAlternativeHandler;
-    public Action OnPauseAction;
-
     private InputSystem_Actions playerInputActions;
 
     private void Awake()
@@ -22,16 +19,30 @@ public class GameInput : MonoBehaviour
     private void OnEnable()
     {
         playerInputActions.Player.Jump.performed += JumpPerformed;
+        playerInputActions.Player.Interact.started += InteractStarted;
+        playerInputActions.Player.Interact.performed += InteractPerformed;
     }
 
     private void OnDisable()
     {
         playerInputActions.Player.Jump.performed -= JumpPerformed;
+        playerInputActions.Player.Interact.performed -= InteractPerformed;
+        playerInputActions.Player.Interact.started -= InteractStarted;
     }
 
     private void JumpPerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         OnJumpHandler?.Invoke();
+    }
+
+    private void InteractPerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnInteractHandler?.Invoke();
+    }
+
+    private void InteractStarted(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnInteractHandler?.Invoke();
     }
 
     private void OnDestroy()
