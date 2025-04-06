@@ -18,6 +18,7 @@ public class Lantern : MonoBehaviour
     public void TurnOn()
     {
         isOn = true;
+        InteractableEvents.RaiseOnLanternlit(transform.position);
         foreach (var lightSource in lightSources)
         {
             lightSource.enabled = true;

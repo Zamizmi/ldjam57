@@ -13,6 +13,7 @@ public class Lever : MonoBehaviour, IInteractable
     {
         if (isUsed) return;
         isUsed = true;
+        InteractableEvents.RaiseOnLeverTurn(transform.position);
         InteractActions.OnLevelPulled(actionIdsToSend);
         leverAnimator.SetBool(ANIM_IS_USED, isUsed);
     }

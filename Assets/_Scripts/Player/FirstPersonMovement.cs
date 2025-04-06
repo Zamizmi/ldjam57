@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class FirstPersonMovement : MonoBehaviour
+public class FirstPersonMovement : MonoBehaviour, IHasFootSteps
 {
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private float moveSpeed = 5f;
@@ -39,7 +39,7 @@ public class FirstPersonMovement : MonoBehaviour
         GroundCheck();
 
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-        isWalking = inputVector != Vector2.zero;
+        isWalking = inputVector != Vector2.zero && isGrounded;
         Vector3 moveDir = transform.right * inputVector.x + transform.forward * inputVector.y;
 
         // Apply gravity
@@ -74,11 +74,19 @@ public class FirstPersonMovement : MonoBehaviour
     private void HandleJump()
     {
         if (isGrounded && Input.GetButtonDown("Jump"))
+        {
             velocity.y = Mathf.Sqrt(jumpHeight * -1f * Physics.gravity.y);
+            PlayerEvents.RaiseOnFootJump(transform.position);
+        }
     }
 
     private void GroundCheck()
     {
         isGrounded = Physics.CheckSphere(groundChecker.position, groundCheckDistance, groundMask);
+    }
+
+    public bool IsWalking()
+    {
+        return isWalking;
     }
 }
