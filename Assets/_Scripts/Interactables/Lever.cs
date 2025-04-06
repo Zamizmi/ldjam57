@@ -20,6 +20,7 @@ public class Lever : MonoBehaviour, IInteractable
 
     public string GetInteractText(Player player)
     {
+        if (isUsed) return null;
         return "Turn lever";
     }
 }

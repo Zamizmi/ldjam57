@@ -3,18 +3,46 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private IInteractable selectedInteractable;
-    public event Action<IInteractable> OnSelectedInteractableChanged;
+    public static Player Instance { get; private set; }
 
+    private IInteractable selectedInteractable;
     [SerializeField] private GameInput gameInput;
     [Header("Interactions")]
     [SerializeField] private float interactionDistance = 1.5f;
     [SerializeField] private LayerMask interactionsLayerMask;
+    [SerializeField] private Transform startingPoint;
     private FirstPersonMovement fpsHandler;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Start()
     {
         gameInput.OnInteractHandler += PlayerInteractHandler;
+        PlayerEvents.OnPlayerRespawn += Respawn;
         fpsHandler = GetComponent<FirstPersonMovement>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Lethal")
+        {
+            HandleDeath();
+        }
+    }
+
+    private void HandleDeath()
+    {
+        DisableLooking();
+        PlayerEvents.RaiseOnDead();
+    }
+
+    private void Respawn()
+    {
+        Debug.Log("Respawn!");
+        transform.position = startingPoint.position;
+        EnableLooking();
     }
 
     private void OnDisable()
@@ -64,7 +92,7 @@ public class Player : MonoBehaviour
     private void SetSelectedInteractable(IInteractable selectedInteractable)
     {
         this.selectedInteractable = selectedInteractable;
-        OnSelectedInteractableChanged?.Invoke(selectedInteractable);
+        PlayerEvents.RaiseInteractableChanged(selectedInteractable);
     }
 
     private void PlayerInteractHandler()
@@ -72,6 +100,7 @@ public class Player : MonoBehaviour
         if (selectedInteractable != null)
         {
             selectedInteractable?.Interact(this);
+            PlayerEvents.RaiseOnInteraction(selectedInteractable);
         }
     }
 }

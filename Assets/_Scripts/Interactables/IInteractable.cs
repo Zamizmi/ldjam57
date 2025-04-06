@@ -6,8 +6,5 @@ public interface IInteractable
     {
     }
 
-    public virtual string GetInteractText(Player actor)
-    {
-        return "Interact";
-    }
+    public string GetInteractText(Player actor);
 }

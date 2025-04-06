@@ -89,4 +89,16 @@ public class BallistaController : MonoBehaviour, IInteractable
             rb.AddForce(launchPoint.forward * launchForce);
         }
     }
+
+    public string GetInteractText(Player actor)
+    {
+        if (actor != activatedPlayer)
+        {
+            return "Use Cannon";
+        }
+        else
+        {
+            return "leave Cannon";
+        }
+    }
 }
