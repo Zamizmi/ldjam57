@@ -34,11 +34,7 @@ public class VictoryUI : MonoBehaviour
     private void HandleGameWin()
     {
         Show();
-        FadeIn();
         victoryCam.gameObject.SetActive(true);
-        flashyImage.enabled = false;
-        FadeOut();
-        ShowRestart();
     }
 
     private void ShowRestart()
@@ -54,6 +50,11 @@ public class VictoryUI : MonoBehaviour
             canvasGroup.alpha = Mathf.Lerp(from, to, time / fadeDuration);
             time += Time.deltaTime;
             yield return null;
+        }
+        if (to == 0f)
+        {
+            ShowRestart();
+            flashyImage.enabled = false;
         }
         canvasGroup.alpha = to;
     }

@@ -1,16 +1,26 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private Button startButton;
+    [SerializeField] private StoryManager storyManager;
+
+    private void Start()
     {
-        
+        startButton.onClick.AddListener(() => StartGame());
     }
 
-    // Update is called once per frame
-    void Update()
+    private void StartGame()
     {
-        
+        storyManager.StartIntro();
+        Hide();
+    }
+
+    private void Hide()
+    {
+        gameObject.SetActive(false);
     }
 }

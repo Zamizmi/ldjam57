@@ -45,6 +45,10 @@ public class FirstPersonMovement : MonoBehaviour, IHasFootSteps
         isWalking = inputVector != Vector2.zero && isGrounded;
         Vector3 moveDir = transform.right * inputVector.x + transform.forward * inputVector.y;
 
+        // Reset vertical velocity if grounded and not jumping
+        if (isGrounded && velocity.y < 0)
+            velocity.y = -2f; // small value keeps grounded
+
         // Apply gravity
         velocity.y += Physics.gravity.y * Time.deltaTime;
 

@@ -4,7 +4,6 @@ public class GoalManager : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("trigger");
         if (other.gameObject.TryGetComponent(out Player player))
         {
             player.DisableLooking();
@@ -15,5 +14,4 @@ public class GoalManager : MonoBehaviour
     {
         StoryEvents.RaiseOnVictory();
     }
-
 }
