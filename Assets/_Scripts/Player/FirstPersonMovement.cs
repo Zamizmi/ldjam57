@@ -16,7 +16,7 @@ public class FirstPersonMovement : MonoBehaviour, IHasFootSteps
     [SerializeField] private GameInput gameInput;
     private bool isWalking;
     [Header("Looking")]
-    [SerializeField] private float mouseSensitivity = 100f;
+    [SerializeField] private float mouseSensitivity = 50f;
     [SerializeField] private Transform virtualCamera;
     private Vector2 lookInput;
     private float xRotation = 0f;

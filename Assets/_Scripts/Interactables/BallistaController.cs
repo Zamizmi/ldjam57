@@ -45,7 +45,11 @@ public class BallistaController : MonoBehaviour, IInteractable
 
     void HandleAiming()
     {
-        Vector2 lookInput = GameInput.Instance.GetLookingVector();
+        Vector2 lookInput = GameInput.Instance.GetMovementVectorNormalized();
+        if (lookInput == Vector2.zero)
+        {
+            lookInput = GameInput.Instance.GetLookingVector();
+        }
         float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime;
         float mouseY = lookInput.y * mouseSensitivity * Time.deltaTime;
 

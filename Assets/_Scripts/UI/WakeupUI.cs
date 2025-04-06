@@ -13,7 +13,6 @@ public class WakeupUI : MonoBehaviour
     {
         GameInput.Instance.OnInteractHandler += HandleInteraction;
         PlayerEvents.OnPlayerDeath += FadeIn;
-        canvasGroup.alpha = 0f;
     }
 
     private void FadeIn()

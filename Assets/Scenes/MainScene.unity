@@ -18828,8 +18828,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 0}
-  moveSpeed: 10
-  jumpHeight: 4
+  moveSpeed: 5
+  jumpHeight: 2
   groundCheckDistance: 0.4
   groundMask:
     serializedVersion: 2
@@ -36991,6 +36991,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 2100339585}
   fadeDuration: 3
   victoryCam: {fileID: 512328112}
+  flashyImage: {fileID: 0}
   resetButton: {fileID: 1073816533}
 --- !u!1 &2106406346
 GameObject:

@@ -11,6 +11,7 @@ public class VictoryUI : MonoBehaviour
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private float fadeDuration;
     [SerializeField] private CinemachineCamera victoryCam;
+    [SerializeField] private Image flashyImage;
     [SerializeField] private Button resetButton;
 
     private void Start()
@@ -35,6 +36,7 @@ public class VictoryUI : MonoBehaviour
         Show();
         FadeIn();
         victoryCam.gameObject.SetActive(true);
+        flashyImage.enabled = false;
         FadeOut();
         ShowRestart();
     }
