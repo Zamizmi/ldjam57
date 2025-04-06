@@ -20,11 +20,13 @@ public class FirstPersonMovement : MonoBehaviour, IHasFootSteps
     [SerializeField] private Transform virtualCamera;
     private Vector2 lookInput;
     private float xRotation = 0f;
+    private bool movementAllowed;
 
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        movementAllowed = true;
     }
 
     private void Update()
@@ -36,6 +38,7 @@ public class FirstPersonMovement : MonoBehaviour, IHasFootSteps
 
     void HandleMovement()
     {
+        if (!movementAllowed) return;
         GroundCheck();
 
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
@@ -50,6 +53,16 @@ public class FirstPersonMovement : MonoBehaviour, IHasFootSteps
         characterController.Move(finalMove * Time.deltaTime);
     }
 
+    public void DisableMovement()
+    {
+        movementAllowed = false;
+    }
+
+    public void EnableMovement()
+    {
+        movementAllowed = true;
+    }
+
     private void FixedUpdate()
     {
         GroundCheck();
@@ -57,6 +70,7 @@ public class FirstPersonMovement : MonoBehaviour, IHasFootSteps
 
     private void HandleMouseLooking()
     {
+        if (!movementAllowed) return;
         // Apply sensitivity and deltaTime to input
         lookInput = gameInput.GetLookingVector();
         float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime;

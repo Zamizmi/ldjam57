@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -8,8 +9,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] footstepsClips;
     [SerializeField] private AudioClip[] jumpClips;
     [SerializeField] private AudioClip[] leverClips;
+    [SerializeField] private AudioClip[] targetClips;
+    [SerializeField] private AudioClip[] ballistaShotClip;
     [SerializeField] private AudioClip thunderClip;
     [SerializeField] private AudioClip stormClip;
+    [SerializeField] private AudioClip waterDrainClip;
 
     private void OnEnable()
     {
@@ -19,6 +23,14 @@ public class AudioManager : MonoBehaviour
         InteractableEvents.OnLeverTurn += PlayerLeverSound;
         StoryEvents.OnStorm += PlayStorm;
         StoryEvents.OnThunder += PlayThunder;
+        InteractableEvents.OnTargetActivation += PlayTargetSound;
+        InteractableEvents.OnBallistaShot += PlayBallistaSound;
+        InteractActions.OnLeverActivated += PlayWaterDrainSound;
+    }
+
+    private void PlayWaterDrainSound(List<string> list)
+    {
+        PlaySoundFXFadeIn(waterDrainClip, Camera.main.transform.position, 2f);
     }
 
     public void PlayStorm(Vector3 position)
@@ -26,10 +38,22 @@ public class AudioManager : MonoBehaviour
         PlaySoundFXFadeIn(stormClip, position, 1f);
     }
 
+    private void PlayBallistaSound(Vector3 position)
+    {
+        int index = UnityEngine.Random.Range(0, ballistaShotClip.Length);
+        float pitch = UnityEngine.Random.Range(0.95f, 1.05f);
+        PlaySoundFX(ballistaShotClip[index], position, 1f, pitch);
+    }
+
 
     public void PlayThunder(Vector3 position)
     {
         PlaySoundFX(thunderClip, position, 2f);
+    }
+
+    public void PlayTargetSound(Vector3 position)
+    {
+        PlaySoundFX(targetClips[0], position, 1f);
     }
 
     private void PlayerLeverSound(Vector3 position)

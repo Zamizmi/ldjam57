@@ -10,9 +10,11 @@ public class Player : MonoBehaviour
     [Header("Interactions")]
     [SerializeField] private float interactionDistance = 1.5f;
     [SerializeField] private LayerMask interactionsLayerMask;
+    private FirstPersonMovement fpsHandler;
     private void Start()
     {
         gameInput.OnInteractHandler += PlayerInteractHandler;
+        fpsHandler = GetComponent<FirstPersonMovement>();
     }
 
     private void OnDisable()
@@ -23,6 +25,16 @@ public class Player : MonoBehaviour
     private void Update()
     {
         HandleInteractions();
+    }
+
+    public void DisableLooking()
+    {
+        fpsHandler.DisableMovement();
+    }
+
+    public void EnableLooking()
+    {
+        fpsHandler.EnableMovement();
     }
 
     private void HandleInteractions()
