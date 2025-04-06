@@ -12,6 +12,12 @@ public class InteractHUD : MonoBehaviour
         PlayerEvents.OnInteraction += HandleInteractableChange;
     }
 
+    private void OnDestroy()
+    {
+        PlayerEvents.OnInteractableChange -= HandleInteractableChange;
+        PlayerEvents.OnInteraction -= HandleInteractableChange;
+    }
+
     private void HandleInteractableChange(IInteractable changed)
     {
         selectedInteractable = changed;

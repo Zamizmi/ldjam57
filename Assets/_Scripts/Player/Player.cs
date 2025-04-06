@@ -40,7 +40,6 @@ public class Player : MonoBehaviour
 
     private void Respawn()
     {
-        Debug.Log("Respawn!");
         transform.position = startingPoint.position;
         EnableLooking();
     }
@@ -67,28 +66,19 @@ public class Player : MonoBehaviour
 
     private void HandleInteractions()
     {
-        // Raycast from the center of the camera's viewport
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, interactionDistance, interactionsLayerMask))
-        {
-            if (raycastHit.transform.TryGetComponent(out IInteractable interactable))
-            {
-                if (selectedInteractable != interactable)
-                {
-                    SetSelectedInteractable(interactable);
-                }
-            }
-            else
-            {
-                SetSelectedInteractable(null);
-            }
-        }
-        else
-        {
-            SetSelectedInteractable(null);
-        }
-    }
 
+        Collider[] hits = Physics.OverlapSphere(transform.position, interactionDistance, interactionsLayerMask);
+        foreach (var hit in hits)
+        {
+            if (hit.TryGetComponent(out IInteractable interactable))
+            {
+                SetSelectedInteractable(interactable);
+                return;
+            }
+        }
+        SetSelectedInteractable(null);
+
+    }
     private void SetSelectedInteractable(IInteractable selectedInteractable)
     {
         this.selectedInteractable = selectedInteractable;

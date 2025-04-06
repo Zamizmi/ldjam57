@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class GoalManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        Debug.Log("trigger");
+        if (other.gameObject.TryGetComponent(out Player player))
+        {
+            player.DisableLooking();
+            OnVictory();
+        }
+    }
+    private void OnVictory()
+    {
+        StoryEvents.RaiseOnVictory();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

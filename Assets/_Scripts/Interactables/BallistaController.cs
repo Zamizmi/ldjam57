@@ -12,30 +12,9 @@ public class BallistaController : MonoBehaviour, IInteractable
     public float shootingCooldown = 2f;
     private float cooldownTimer = 0f;
     public CinemachineCamera ballistCamera;
-    private bool isAiming = false;
+    public bool isAiming = false;
     // This is used as a fail safe to get free from ballista
     private Player activatedPlayer;
-
-    private void Start()
-    {
-        GameInput.Instance.OnInteractHandler += PlayerInteractHandler;
-    }
-
-    private void OnDisable()
-    {
-        GameInput.Instance.OnInteractHandler -= PlayerInteractHandler;
-    }
-
-    private void PlayerInteractHandler()
-    {
-        if (isAiming)
-        {
-            ballistCamera.gameObject.SetActive(false);
-            activatedPlayer.EnableLooking();
-            isAiming = !isAiming;
-            activatedPlayer = null;
-        }
-    }
 
     public void Interact(Player player)
     {

@@ -25,7 +25,7 @@ public class SkullManager : MonoBehaviour
             if (!target.IsActivated()) return;
         }
         InteractActions.OnLevelPulled(eventStringsToSend);
-        animator.SetBool(ANIM_COMPLETED, isCompleted);
+        animator.SetBool(ANIM_COMPLETED, true);
         isCompleted = true;
     }
 }

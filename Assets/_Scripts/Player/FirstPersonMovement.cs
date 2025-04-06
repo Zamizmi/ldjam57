@@ -56,11 +56,13 @@ public class FirstPersonMovement : MonoBehaviour, IHasFootSteps
     public void DisableMovement()
     {
         movementAllowed = false;
+        characterController.enabled = false;
     }
 
     public void EnableMovement()
     {
         movementAllowed = true;
+        characterController.enabled = true;
     }
 
     private void FixedUpdate()
