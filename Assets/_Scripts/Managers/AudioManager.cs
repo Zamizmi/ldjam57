@@ -1,5 +1,4 @@
-using System;
-using Unity.Mathematics;
+using System.Collections;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -9,6 +8,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] footstepsClips;
     [SerializeField] private AudioClip[] jumpClips;
     [SerializeField] private AudioClip[] leverClips;
+    [SerializeField] private AudioClip thunderClip;
+    [SerializeField] private AudioClip stormClip;
 
     private void OnEnable()
     {
@@ -16,6 +17,19 @@ public class AudioManager : MonoBehaviour
         PlayerEvents.OnJump += PlayJumpSound;
         InteractableEvents.OnLanternTurn += PlayLanternSound;
         InteractableEvents.OnLeverTurn += PlayerLeverSound;
+        StoryEvents.OnStorm += PlayStorm;
+        StoryEvents.OnThunder += PlayThunder;
+    }
+
+    public void PlayStorm(Vector3 position)
+    {
+        PlaySoundFXFadeIn(stormClip, position, 1f);
+    }
+
+
+    public void PlayThunder(Vector3 position)
+    {
+        PlaySoundFX(thunderClip, position, 2f);
     }
 
     private void PlayerLeverSound(Vector3 position)
@@ -55,6 +69,31 @@ public class AudioManager : MonoBehaviour
         audioSource.Play();
         float clipLength = audioSource.clip.length;
         Destroy(audioSource.gameObject, clipLength);
+    }
+
+    private void PlaySoundFXFadeIn(AudioClip clip, Vector3 spawnTransform, float fadeIn)
+    {
+        AudioSource audioSource = Instantiate(soundFXPrefab, spawnTransform, Quaternion.identity);
+        audioSource.clip = clip;
+        audioSource.pitch = 1f;
+        audioSource.volume = 0f;
+        StartCoroutine(FadeIn(audioSource, fadeIn, 1f));
+        audioSource.Play();
+        float clipLength = audioSource.clip.length;
+        Destroy(audioSource.gameObject, clipLength);
+    }
+
+    IEnumerator FadeIn(AudioSource source, float duration, float targetVolume)
+    {
+        float startVolume = 0f;
+
+        for (float t = 0f; t < duration; t += Time.deltaTime)
+        {
+            source.volume = Mathf.Lerp(startVolume, targetVolume, t / duration);
+            yield return null;
+        }
+
+        source.volume = targetVolume;
     }
 }
 
