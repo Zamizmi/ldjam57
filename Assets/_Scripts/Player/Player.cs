@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
     [Header("Interactions")]
     [SerializeField] private float interactionDistance = 1.5f;
     [SerializeField] private LayerMask interactionsLayerMask;
-
     private void Start()
     {
         gameInput.OnInteractHandler += PlayerInteractHandler;

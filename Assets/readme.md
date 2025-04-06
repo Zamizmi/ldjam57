@@ -40,13 +40,13 @@ Seikkailupeli, jossa pelaaja laskeutuu syvyyksiin seuraamalla portaikkoa.
 Vaatii:
 
 - 3d liikkumisen x
-- hypyn x
-- Jonkinlaisen hyökkäyksen
-- Vihollisia
+- hypyn
 - Interactionin oviin
 - Valot jolla ohjata pelaajaa oikeaan suuntaan
-
-Core loop
-
-- Pelaaja näkee jotain veden alla ja näkyy vivun, jota vetämällä veden pinta laskee. Veden lasku paljastaa uusia alueita, ja vihollisia.
-- Viholliset yrittävät tappaa pelaajan -> tuhoa vastustajat
+- 3 estettä
+  - Hyppelyeste
+    - Alussa ettei ärsytä
+  - Ampumaeste
+    - Ei voi epäonnistua, vaatii vipujen vetämistä, jotta esteet siirtyvät
+    - Vaatii yrityksiä
+  -
