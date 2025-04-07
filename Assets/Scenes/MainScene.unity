@@ -9765,7 +9765,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BackGroundColor: {r: 0.42475083, g: 0.7830189, b: 0.73673195, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -19803,7 +19803,7 @@ MonoBehaviour:
     m_Bits: 64
   groundChecker: {fileID: 1188253891}
   gameInput: {fileID: 283690813}
-  mouseSensitivity: 100
+  mouseSensitivity: 10
   virtualCamera: {fileID: 481622363}
 --- !u!114 &864263827
 MonoBehaviour:
