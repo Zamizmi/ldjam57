@@ -83,6 +83,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4872958426632049211}
   - component: {fileID: 6810024951730528334}
+  - component: {fileID: 3879118684532888421}
   m_Layer: 7
   m_Name: BallistaCamera
   m_TagString: Untagged
@@ -148,6 +149,23 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &3879118684532888421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3112469399494609050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NoiseProfile: {fileID: 11400000, guid: 7648740dc031c472ab0854dac991e210, type: 2}
+  PivotOffset: {x: 0, y: 0, z: 0}
+  AmplitudeGain: 0
+  FrequencyGain: 1
+  m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &6171400576268375427
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,6 +241,9 @@ MonoBehaviour:
   mouseSensitivity: 1.5
   shootingCooldown: 2
   ballistCamera: {fileID: 6810024951730528334}
+  cameraShake: {fileID: 3879118684532888421}
+  isAiming: 0
+  activatedPlayer: {fileID: 0}
 --- !u!1001 &2969353109001517548
 PrefabInstance:
   m_ObjectHideFlags: 0

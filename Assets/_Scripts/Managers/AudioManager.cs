@@ -30,7 +30,8 @@ public class AudioManager : MonoBehaviour
 
     private void PlayWaterDrainSound(List<string> list)
     {
-        PlaySoundFXFadeIn(waterDrainClip, Camera.main.transform.position, 2f);
+        float pitch = UnityEngine.Random.Range(0.95f, 1.05f);
+        PlaySoundFX(waterDrainClip, Camera.main.transform.position, 3f, pitch);
     }
 
     public void PlayStorm(Vector3 position)
@@ -44,7 +45,6 @@ public class AudioManager : MonoBehaviour
         float pitch = UnityEngine.Random.Range(0.95f, 1.05f);
         PlaySoundFX(ballistaShotClip[index], position, 1f, pitch);
     }
-
 
     public void PlayThunder(Vector3 position)
     {
@@ -101,7 +101,7 @@ public class AudioManager : MonoBehaviour
         audioSource.clip = clip;
         audioSource.pitch = 1f;
         audioSource.volume = 0f;
-        StartCoroutine(FadeIn(audioSource, fadeIn, 1f));
+        StartCoroutine(FadeIn(audioSource, fadeIn, 2f));
         audioSource.Play();
         float clipLength = audioSource.clip.length;
         Destroy(audioSource.gameObject, clipLength);

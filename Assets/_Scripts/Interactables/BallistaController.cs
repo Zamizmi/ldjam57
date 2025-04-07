@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -12,9 +13,11 @@ public class BallistaController : MonoBehaviour, IInteractable
     public float shootingCooldown = 2f;
     private float cooldownTimer = 0f;
     public CinemachineCamera ballistCamera;
+    [SerializeField] private CinemachineBasicMultiChannelPerlin cameraShake;
+
     public bool isAiming = false;
     // This is used as a fail safe to get free from ballista
-    private Player activatedPlayer;
+    public Player activatedPlayer;
 
     public void Interact(Player player)
     {
@@ -22,6 +25,7 @@ public class BallistaController : MonoBehaviour, IInteractable
         {
             ballistCamera.gameObject.SetActive(false);
             player.EnableLooking();
+            activatedPlayer = null;
         }
         else
         {
@@ -70,6 +74,24 @@ public class BallistaController : MonoBehaviour, IInteractable
         if (rb != null)
         {
             rb.AddForce(launchPoint.forward * launchForce);
+        }
+        CameraShake(1f);
+    }
+
+    private void CameraShake(float duration)
+    {
+        cameraShake.AmplitudeGain = 1f;
+        StartCoroutine(CameraShakeCoroutine(duration));
+    }
+
+    IEnumerator CameraShakeCoroutine(float duration)
+    {
+        float time = 0f;
+        while (time < duration)
+        {
+            cameraShake.AmplitudeGain = Mathf.Lerp(1f, 0f, time / duration);
+            time += Time.deltaTime;
+            yield return null;
         }
     }
 

@@ -17,6 +17,7 @@ public class MainMenu : MonoBehaviour
     {
         storyManager.StartIntro();
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         Hide();
     }
 

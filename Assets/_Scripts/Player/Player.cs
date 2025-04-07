@@ -1,4 +1,6 @@
-using System;
+
+using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -11,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float interactionDistance = 1.5f;
     [SerializeField] private LayerMask interactionsLayerMask;
     [SerializeField] private Transform startingPoint;
+    [SerializeField] private CinemachineBasicMultiChannelPerlin cameraShake;
     private FirstPersonMovement fpsHandler;
 
     private void Awake()
@@ -23,6 +26,23 @@ public class Player : MonoBehaviour
         PlayerEvents.OnPlayerRespawn += Respawn;
         fpsHandler = GetComponent<FirstPersonMovement>();
     }
+
+    public void CameraShake(float duration)
+    {
+        cameraShake.AmplitudeGain = .1f;
+        StartCoroutine(CameraShakeCoroutine(duration));
+    }
+    IEnumerator CameraShakeCoroutine(float duration)
+    {
+        float time = 0f;
+        while (time < duration)
+        {
+            cameraShake.AmplitudeGain = Mathf.Lerp(1f, 0f, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
