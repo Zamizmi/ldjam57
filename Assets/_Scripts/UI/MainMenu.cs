@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour
     private void StartGame()
     {
         storyManager.StartIntro();
+        Cursor.visible = false;
         Hide();
     }
 
