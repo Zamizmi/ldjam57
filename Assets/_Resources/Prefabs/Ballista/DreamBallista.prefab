@@ -100,7 +100,7 @@ Transform:
   m_GameObject: {fileID: 3112469399494609050}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.35, y: 0.5, z: -2}
+  m_LocalPosition: {x: -0.6, y: 0.6, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -237,7 +237,7 @@ MonoBehaviour:
   launchPoint: {fileID: 711574463259600854}
   projectilePrefab: {fileID: 7532414319643110901, guid: 9ffae851ad2ba45bb84de4a2bcab7c2a, type: 3}
   rotationSpeed: 30
-  launchForce: 800
+  launchForce: 2000
   mouseSensitivity: 1.5
   shootingCooldown: 2
   ballistCamera: {fileID: 6810024951730528334}
